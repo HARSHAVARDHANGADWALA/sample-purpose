@@ -1,0 +1,332 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>jQuery UI Components Demo</title>
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet"
+          href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            color: #444;
+            margin-top: 30px;
+        }
+
+        .slider-box {
+            margin: 30px 10px;
+        }
+
+        #slider {
+            margin: 20px 0;
+        }
+
+        #sliderValue {
+            font-size: 22px;
+            font-weight: bold;
+            color: #1976d2;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            background: #1976d2;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #125ca1;
+        }
+
+        #dynamicContent {
+            margin-top: 15px;
+            padding: 15px;
+            background: #eef5ff;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>jQuery UI Components Demo</h1>
+
+    <p>
+        This webpage demonstrates Slider, Tabs and Modal Dialog
+        components using jQuery UI.
+    </p>
+
+
+    <!-- ========================= -->
+    <!-- SLIDER -->
+    <!-- ========================= -->
+
+    <h2>1. jQuery UI Slider</h2>
+
+    <div class="slider-box">
+
+        <p>
+            Select a value using the slider:
+        </p>
+
+        <div id="slider"></div>
+
+        <p>
+            Selected Value:
+            <span id="sliderValue">50</span>
+        </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- TABS -->
+    <!-- ========================= -->
+
+    <h2>2. jQuery UI Tabs</h2>
+
+    <div id="tabs">
+
+        <ul>
+            <li>
+                <a href="#tab1">About</a>
+            </li>
+
+            <li>
+                <a href="#tab2">Features</a>
+            </li>
+
+            <li>
+                <a href="#tab3">Applications</a>
+            </li>
+        </ul>
+
+
+        <div id="tab1">
+
+            <h3>About jQuery UI</h3>
+
+            <p>
+                jQuery UI is a collection of user interface
+                interactions, effects, widgets and themes
+                built on top of jQuery.
+            </p>
+
+        </div>
+
+
+        <div id="tab2">
+
+            <h3>Features</h3>
+
+            <ul>
+                <li>Slider</li>
+                <li>Tabs</li>
+                <li>Dialog Box</li>
+                <li>Buttons</li>
+                <li>Dynamic Content</li>
+            </ul>
+
+        </div>
+
+
+        <div id="tab3">
+
+            <h3>Applications</h3>
+
+            <p>
+                jQuery UI components can be used in dashboards,
+                forms, educational websites, administration
+                systems and interactive web applications.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- MODAL / DIALOG -->
+    <!-- ========================= -->
+
+    <h2>3. jQuery UI Dialog</h2>
+
+    <button id="openDialog" class="btn">
+        Open Modal
+    </button>
+
+
+    <div id="dialog" title="jQuery UI Modal">
+
+        <p>
+            Welcome to the jQuery UI dialog box!
+        </p>
+
+        <p>
+            This modal demonstrates interactive content
+            without navigating to another webpage.
+        </p>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- DYNAMIC CONTENT -->
+    <!-- ========================= -->
+
+    <h2>4. Dynamic Content</h2>
+
+    <button id="updateButton" class="btn">
+        Update Content
+    </button>
+
+    <div id="dynamicContent">
+        Click the button to update this content dynamically.
+    </div>
+
+</div>
+
+
+<!-- ================================= -->
+<!-- jQuery -->
+<!-- ================================= -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+
+<!-- ================================= -->
+<!-- jQuery UI -->
+<!-- ================================= -->
+
+<script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
+
+
+<!-- ================================= -->
+<!-- OUR JAVASCRIPT CODE -->
+<!-- ================================= -->
+
+<script>
+
+$(document).ready(function() {
+
+
+    // =====================================
+    // 1. SLIDER
+    // =====================================
+
+    $("#slider").slider({
+
+        min: 0,
+
+        max: 100,
+
+        value: 60,
+
+        slide: function(event, ui) {
+
+            $("#sliderValue").text(ui.value);
+
+        }
+
+    });
+
+
+    // =====================================
+    // 2. TABS
+    // =====================================
+
+    $("#tabs").tabs();
+
+
+    // =====================================
+    // 3. DIALOG / MODAL
+    // =====================================
+
+    $("#dialog").dialog({
+
+        autoOpen: false,
+
+        modal: true,
+
+        width: 400,
+
+        buttons: {
+
+            "Close": function() {
+
+                $(this).dialog("close");
+
+            }
+
+        }
+
+    });
+
+
+    // Open dialog when button is clicked
+
+    $("#openDialog").click(function() {
+
+        $("#dialog").dialog("open");
+
+    });
+
+
+    // =====================================
+    // 4. DYNAMIC CONTENT
+    // =====================================
+
+    $("#updateButton").click(function() {
+
+        $("#dynamicContent").html(
+
+            "<strong>Content Updated!</strong><br>" +
+
+            "The content was changed dynamically using jQuery."
+
+        );
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
+```
+
+
+
+

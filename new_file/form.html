@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Form</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Student Form</h2>
+
+    <form id="myForm">
+
+        <input type="text" id="name" placeholder="Enter Name">
+        <span class="error" id="nameError"></span>
+        <br>
+
+        <input type="email" id="email" placeholder="Enter Email">
+        <span class="error" id="emailError"></span>
+        <br>
+
+        <button type="button" id="add">
+            Add Phone Field
+        </button>
+
+        <div id="phoneField"></div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <p id="message"></p>
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            // Add field dynamically
+            $("#add").click(function () {
+
+                $("#phoneField").html(
+                    '<input type="text" id="phone" placeholder="Enter Phone">'
+                );
+
+            });
+
+
+            // Validation
+            $("#myForm").submit(function (e) {
+
+                e.preventDefault();
+
+                $(".error").text("");
+                $("#message").text("");
+
+                let name = $("#name").val();
+                let email = $("#email").val();
+
+                let valid = true;
+
+                if (name == "") {
+                    $("#nameError").text("Name is required");
+                    valid = false;
+                }
+
+                if (email == "") {
+                    $("#emailError").text("Email is required");
+                    valid = false;
+                }
+
+                if (valid) {
+                    $("#message").text(
+                        "Form submitted successfully!"
+                    );
+                }
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
